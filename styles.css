@@ -53,7 +53,7 @@ main div input{
 
 .border-item {
     display: flex;
-    flex-direction: column;      /* stack name above flag */
+    flex-direction: column;      
     align-items: center;
     justify-content: center;
     padding: 8px;
@@ -76,19 +76,19 @@ main div input{
 }
 
 .border-flag {
-    width: 100%;              /* force within box */
-    max-width: 80px;          /* cap its size */
+    width: 100%;              
+    max-width: 80px;          
     height: auto;
-    margin-top: 6px;          /* spacing from name */
+    margin-top: 6px;         
     align-content: center;
 }
 
-/* main country flag sizing */
+
 .country-flag {
     display: block;
     max-width: 200px;
     height: auto;
-    margin: 10px auto 0; /* top, horizontal auto to center */
+    margin: 10px auto 0; 
 }
 
 .error {

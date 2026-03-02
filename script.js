@@ -10,7 +10,6 @@ function showError(message) {
 }
 
 function displayCountryInfo(data) {
-    // assume data is the first element of the array returned by the API
     const country = data[0];
     const info = document.getElementById('country-info');
 
@@ -59,7 +58,6 @@ async function searchCountry(countryName) {
     showSpinner(true);
 
     try {
-        // use fullText=true so we get an exact match (avoids Hong Kong vs China issue)
         const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
@@ -80,7 +78,6 @@ document.getElementById('search-btn').addEventListener('click', () => {
     searchCountry(country);
 });
 
-// allow enter key
 document.getElementById('country-input').addEventListener('keyup', e => {
     if (e.key === 'Enter') document.getElementById('search-btn').click();
 });
