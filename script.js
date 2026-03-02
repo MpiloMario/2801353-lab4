@@ -59,14 +59,21 @@ async function searchCountry(countryName) {
 
     try {
         const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
+
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+            if (response.status === 404) {
+                showError('Country not found. Please check the name and try again.');
+            } else {
+                showError(`Server error: ${response.status}`);
+            }
+            return; // exit early
         }
+
         const data = await response.json();
         displayCountryInfo(data);
     } catch (error) {
-        showError('Unable to find that country.');
-        alert(error.message);
+        showError('Unable to retrieve country data.');
+        console.error(error);
     } finally {
         showSpinner(false);
     }
