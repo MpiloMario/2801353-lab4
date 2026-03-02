@@ -19,6 +19,14 @@ main div button{
     border:none;
     cursor: pointer;
 }
+main div input{
+    display: block;
+    margin: 20px auto;
+    size: 1.2rem;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 5px;
+}
 .country-card{
     background-color: black;
     color: antiquewhite;
@@ -45,8 +53,9 @@ main div button{
 
 .border-item {
     display: flex;
+    flex-direction: column;      /* stack name above flag */
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 8px;
     margin: 0;
     font-size: 1.1rem;          
@@ -67,9 +76,10 @@ main div button{
 }
 
 .border-flag {
-    width: 24px;              
+    width: 100%;              /* force within box */
+    max-width: 80px;          /* cap its size */
     height: auto;
-    margin-left: 6px;
+    margin-top: 6px;          /* spacing from name */
     align-content: center;
 }
 
