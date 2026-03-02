@@ -1,26 +1,86 @@
 .spinner{
+    margin: 20px auto;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
     animation: spin 1s linear infinite;
 }
 @keyframes spin{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+main div button{
+    display: block;
+    margin: 20px auto;
+    size: 1.2rem;
+    padding: 10px 20px;
+    border:none;
+    cursor: pointer;
+}
 .country-card{
-    background-color: beige;
+    background-color: black;
+    color: antiquewhite;
+    width: 35%;
     padding: 20px;
     border: 1px solid black;
     margin: 20px auto;
     border-radius: 10px;
+    text-align: center;
 }
 .border-grid{
-    display: flex;
+    display: grid;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: beige;
+    background-color: black;
+    color: antiquewhite;
     margin: 20px auto;
-    width: 45%;
+    width: 40%;
 
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 25px;
+    padding: 8px;
 }
+
+.border-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    margin: 0;
+    font-size: 1.1rem;          
+    border: 1px solid #666;
+    border-radius: 6px;
+    background: #222;
+}
+
+.border-label {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.border-name {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 6px;
+}
+
+.border-flag {
+    width: 24px;              
+    height: auto;
+    margin-left: 6px;
+    align-content: center;
+}
+
+/* main country flag sizing */
+.country-flag {
+    display: block;
+    max-width: 200px;
+    height: auto;
+    margin: 10px auto 0; /* top, horizontal auto to center */
+}
+
 .error {
     color: red;
     border: 1px solid red;
@@ -32,4 +92,28 @@
 }
 .hidden{
     display: none;
+}
+.heading{
+    text-align: center;
+    color: antiquewhite;
+    background-color: black;
+    padding:20px;
+}
+body{
+    margin:0;
+}
+.search-container{
+    display: grid;
+    justify-content: center;
+    margin: 20px auto;
+    background-color: black;
+    color:antiquewhite;
+    width: 35%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+button{
+    color:antiquewhite;
+    background-color: black;
 }

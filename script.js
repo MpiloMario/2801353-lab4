@@ -1,4 +1,3 @@
-// helper utilities
 function showSpinner(show) {
     const spinner = document.getElementById('loading-spinner');
     spinner.classList.toggle('hidden', !show);
@@ -20,20 +19,33 @@ function displayCountryInfo(data) {
     <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : 'N/A'}</p>
     <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
     <p><strong>Region:</strong> ${country.region}</p>
-    <img src="${country.flags.svg}" alt="${country.name.common} flag">
+    <img class="country-flag" src="${country.flags.svg}" alt="${country.name.common} flag">
     `;
 
-    // show bordering countries if available
     const borderSection = document.getElementById('bordering-countries');
     borderSection.innerHTML = '';
 
-    if (country.borders && country.borders.length) {
-        country.borders.forEach(code => {
-            const span = document.createElement('span');
-            span.className = 'border-item';
-            span.textContent = code;
-            borderSection.appendChild(span);
-        });
+    const borderCodes = (country.borders || []).filter(c => c !== country.cca3);
+    if (borderCodes.length) {
+        fetch(`https://restcountries.com/v3.1/alpha?codes=${borderCodes.join(',')}`)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(bordersData => {
+                bordersData.forEach(borderCountry => {
+                    const span = document.createElement('span');
+                    span.className = 'border-item';
+                    span.innerHTML = `
+                        <div class="border-name">${borderCountry.name.common}</div>
+                        <img src="${borderCountry.flags.svg}" alt="${borderCountry.name.common} flag" class="border-flag">
+                    `;
+                    borderSection.appendChild(span);
+                });
+            })
+            .catch(err => {
+                console.error('Failed to load border countries', err);
+            });
     }
 }
 
@@ -47,7 +59,8 @@ async function searchCountry(countryName) {
     showSpinner(true);
 
     try {
-        const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}`);
+        // use fullText=true so we get an exact match (avoids Hong Kong vs China issue)
+        const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
