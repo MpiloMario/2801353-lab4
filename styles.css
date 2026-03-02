@@ -10,14 +10,21 @@
     padding: 20px;
     border: 1px solid black;
     margin: 20px auto;
+    border-radius: 10px;
 }
 .border-grid{
     display: grid;
 
+
 }
 .error {
     color: red;
-    /* Additional styling */
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px auto;
+    width:250px;
+    background-color: yellow;
 }
 .hidden{
     display: none;
